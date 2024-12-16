@@ -139,6 +139,8 @@ export async function loginController(req,res){
                         success: false
                     })
         }
+        
+        //compare the hashed password with the provided password
         const checkPassword = await bcryptjs.compare(password,user.password)
 
         if(!checkPassword){
@@ -174,7 +176,7 @@ export async function loginController(req,res){
 
     } catch (error) {
         res.status(500).json({
-            message:"this is the login error" || error.message || error,
+            message:"this is the a login error" || error.message || error,
             error: true,
             success: false,
         })
@@ -183,15 +185,17 @@ export async function loginController(req,res){
 
 //logout controller
 export async function logoutController(req,res){
-
+    //clearing the cookies on logout
     const cookiesOptions ={
-        httpOnly:true,
-        secure:true,
-        sameSite:"None"
-    }
+                            httpOnly:true,
+                            secure:true,
+                            sameSite:"None"
+                        }
     try {
-        res.clearCookie('accessToken', cookiesOptions)
+        res.clearCookie('accessToken', cookiesOptions);
+         
         res.clearCookie('refresh_token', cookiesOptions)
+
         return res.json({
             message:"user logged out successfully",
             error: false,
