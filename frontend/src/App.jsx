@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import './App.css'
 import Header from './component/Header'
+import Footer from './component/Footer'
 
 function App() {
   
@@ -8,9 +9,10 @@ function App() {
   return (
    <>
    <Header/>
-     <main>
+     <main className='min-h-[76vh]'>
        <Outlet/>
      </main>
+     <Footer/>
    </>
  
   )
